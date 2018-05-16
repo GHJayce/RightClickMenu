@@ -2,7 +2,28 @@
 
 require 'autoload.php';
 
-use php\RightClickMenu\WindowsBackgroundMenu;
+use php\RightClickMenu\RCMWindowsFactory;
 
-$WindowsBackgroundMenu = new WindowsBackgroundMenu('notepad++', '使用notepad++打开', 'E:\installed\Notepad++\notepad++.exe', 'E:\installed\Notepad++\notepad++.exe', '');
-dump($WindowsBackgroundMenu->generate());
+$windows_right_click_menu = new RCMWindowsFactory('background');
+
+$text = $windows_right_click_menu->getVersion();
+
+$text .= $windows_right_click_menu->setItemName('notepad++')
+                                 ->setShowName('使用notepad++打开')
+                                 ->setPath('E:\installed\Notepad++\notepad++.exe')
+                                 ->setIcon('E:\installed\Notepad++\1.ico')
+                                 ->create();
+
+$windows_right_click_menu = new RCMWindowsFactory('selectedDirectory');
+$text .= $windows_right_click_menu->setItemName('notepad++')
+                                 ->setShowName('使用notepad++打开')
+                                 ->setPath('E:\installed\Notepad++\notepad++.exe')
+                                 ->create();
+
+$windows_right_click_menu = new RCMWindowsFactory('selectedAllFile');
+$text .= $windows_right_click_menu->setItemName('notepad++')
+                                 ->setShowName('使用notepad++打开')
+                                 ->setPath('E:\installed\Notepad++\notepad++.exe')
+                                 ->create();
+
+dump($text);
