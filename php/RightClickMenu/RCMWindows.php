@@ -53,22 +53,24 @@ class RCMWindows implements RightClickMenu
 
     public function getItemName()
     {
-        return $this->item_name;
+        return addcslashes($this->item_name, '"');
     }
 
     public function getShowName()
     {
-        return $this->show_name;
+        return addcslashes($this->show_name, '"');
     }
 
     public function getPath()
     {
-        return str_replace('\\', '\\\\', $this->path);
+        return addcslashes(str_replace('\\', '\\\\', $this->path), '"');
     }
 
     public function getIcon()
     {
-        return empty($this->icon) ? str_replace('\\', '\\\\', $this->path) : str_replace('\\', '\\\\', $this->icon);
+        $icon = empty($this->icon) ? str_replace('\\', '\\\\', $this->path) : str_replace('\\', '\\\\', $this->icon);
+
+        return addcslashes($icon, '"');
     }
 
     public function getExtended()
