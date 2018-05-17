@@ -2,17 +2,14 @@
 
 namespace php\RightClickMenu;
 
-abstract class RCMWindows implements RightClickMenu
+class RCMWindows implements RightClickMenu
 {
-    public static $version = 'Windows Registry Editor Version 5.00';
+    protected $version = 'Windows Registry Editor Version 5.00';
     protected $item_name;
     protected $show_name;
     protected $path;
     protected $icon = null;
-    protected $target;
-
-    abstract public function create();
-    abstract public function remove();
+    protected $extended = null;
 
     public function setItemName(string $item_name)
     {
@@ -37,46 +34,45 @@ abstract class RCMWindows implements RightClickMenu
 
     public function setIcon(string $icon)
     {
-        $this->icon = empty($this->icon) && empty($icon) ? $this->path : $icon;
+        $this->icon = $icon;
 
         return $this;
     }
 
-    protected function getIcon()
+    public function setExtended($extended)
     {
-        return empty($this->icon) ? $this->path : $this->icon;
+        $this->extended = $extended;
+
+        return $this;
     }
 
-    protected function getPosition()
+    public function getVersion()
     {
-        return "HKEY_CLASSES_ROOT\\$this->target\\shell\\$this->item_name";
+        return $this->version;
     }
 
-    protected function create_template()
+    public function getItemName()
     {
-        $position = $this->getPosition();
-        $icon = str_replace('\\', '\\\\', $this->getIcon());
-        $path = str_replace('\\', '\\\\', $this->path);
-
-        $str = <<<EOS
-
-[$position]
-@ = "$this->show_name"
-;;Extended
-"Icon" = "$icon,0"
-
-[$position\command]
-@ = "$path %1"
-
-EOS;
-
-        return isset($this->extended) ? str_replace(';;Extended', '"Extended" = ""', $str) : str_replace(';;Extended', '', $str);
+        return $this->item_name;
     }
 
-    protected function remove_template()
+    public function getShowName()
     {
-        return <<<EOS
-[-$this->getPosition()]
-EOS;
+        return $this->show_name;
+    }
+
+    public function getPath()
+    {
+        return str_replace('\\', '\\\\', $this->path);
+    }
+
+    public function getIcon()
+    {
+        return empty($this->icon) ? str_replace('\\', '\\\\', $this->path) : str_replace('\\', '\\\\', $this->icon);
+    }
+
+    public function getExtended()
+    {
+        return $this->extended;
     }
 }

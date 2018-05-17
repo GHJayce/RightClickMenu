@@ -2,28 +2,14 @@
 
 require 'autoload.php';
 
-use php\RightClickMenu\RCMWindowsFactory;
+use php\Business;
 
-$windows_right_click_menu = new RCMWindowsFactory('background');
+$extended = json_decode($_POST['extended'], true);
+$options = json_decode($_POST['options'], true);
 
-$text = $windows_right_click_menu->getVersion();
+$business = new Business();
+$result = $business->main($_POST['item_name'], $_POST['show_name'], $_POST['path'], $_POST['icon'], $extended, $options);
 
-$text .= $windows_right_click_menu->setItemName('notepad++')
-                                 ->setShowName('使用notepad++打开')
-                                 ->setPath('E:\installed\Notepad++\notepad++.exe')
-                                 ->setIcon('E:\installed\Notepad++\1.ico')
-                                 ->create();
+// dump($result);
 
-$windows_right_click_menu = new RCMWindowsFactory('selectedDirectory');
-$text .= $windows_right_click_menu->setItemName('notepad++')
-                                 ->setShowName('使用notepad++打开')
-                                 ->setPath('E:\installed\Notepad++\notepad++.exe')
-                                 ->create();
-
-$windows_right_click_menu = new RCMWindowsFactory('selectedAllFile');
-$text .= $windows_right_click_menu->setItemName('notepad++')
-                                 ->setShowName('使用notepad++打开')
-                                 ->setPath('E:\installed\Notepad++\notepad++.exe')
-                                 ->create();
-
-dump($text);
+echo json_encode($result);
