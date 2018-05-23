@@ -7,6 +7,7 @@
     <title>生成右键菜单注册文件 - RightClickMenu</title>
 
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <!--[if lt IE 9]>
         <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
@@ -32,7 +33,16 @@
 </nav>
 
 <div class="container">
-    <h2 class="col-sm-offset-2">生成右键菜单注册文件</h2>
+    <h2>生成右键菜单注册文件 <a href="https://ghbjayce.github.io/RightClickMenu/" class="pull-right h4 text-primary">online</a></h2>
+    <div class="alert alert-warning h6" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong><i class="fa fa-exclamation-triangle"></i> 请在本地服务器环境中使用该程序</strong>
+    </div>
+    <div class="alert alert-info h6" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <p><i class="fa fa-info-circle" style="font-size: 20px;"></i> 直接点击生成按钮，能够得到一个右键菜单的小功能。</p>
+        <p>右键<strong>选中文件或文件夹</strong>能够复制选中目标的路径，可以放心下载到本地环境中导入使用。</p>
+    </div>
     <br>
     <form class="form-horizontal">
         <div class="form-group">
@@ -57,7 +67,7 @@
         <div class="form-group">
             <label for="icon" class="col-sm-2 control-label">图标</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="icon" placeholder="显示的图标，留空表示使用程序默认的图标">
+                <input type="text" class="form-control" id="icon" placeholder="显示的图标，留空表示使用程序默认的图标" value="%SYSTEMROOT%\explorer.exe">
                 <!-- <input type="file" id="icon" placeholder="显示的图标"> -->
             </div>
         </div>
