@@ -4,5 +4,5 @@ namespace php\RightClickMenu;
 
 class RCMWindowsBackground extends HkeyClassesRoot
 {
-    protected $target = 'Directory\\background';
+    protected $target = 'Directory\\Background';
 }

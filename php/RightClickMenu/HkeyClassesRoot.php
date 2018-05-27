@@ -38,10 +38,10 @@ abstract class HkeyClassesRoot
 [$position]
 @ = "{$this->config->getShowName()}"
 $extended
-"Icon" = "{$this->config->getIcon()},0"
+"Icon" = "{$this->config->getIcon()}"
 
 [$position\command]
-@ = "{$this->config->getPath()} %1"
+@ = "{$this->config->getPath()}"
     
 EOS;
 
