@@ -4,10 +4,10 @@ namespace php\RightClickMenu;
 
 interface RightClickMenu
 {
-    public function setItemName(string $item_name);
-    public function setShowName(string $show_name);
-    public function setPath(string $path);
-    public function setIcon(string $icon);
+    public function setItemName($item_name);
+    public function setShowName($show_name);
+    public function setPath($path);
+    public function setIcon($icon);
 
     public function getItemName();
     public function getShowName();

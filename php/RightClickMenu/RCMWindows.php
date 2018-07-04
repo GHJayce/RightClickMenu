@@ -11,28 +11,28 @@ class RCMWindows implements RightClickMenu
     protected $icon = null;
     protected $extended = null;
 
-    public function setItemName(string $item_name)
+    public function setItemName($item_name)
     {
         $this->item_name = $item_name;
 
         return $this;
     }
 
-    public function setShowName(string $show_name)
+    public function setShowName($show_name)
     {
         $this->show_name = $show_name;
 
         return $this;
     }
 
-    public function setPath(string $path)
+    public function setPath($path)
     {
         $this->path = $path;
 
         return $this;
     }
 
-    public function setIcon(string $icon)
+    public function setIcon($icon)
     {
         $this->icon = $icon;
 

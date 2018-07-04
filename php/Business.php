@@ -21,7 +21,7 @@ class Business
     }
 
     // 主要业务逻辑
-    public function main(string $item_name, string $show_name, string $path, string $icon, array $extended, array $options)
+    public function main($item_name, $show_name, $path, $icon, array $extended, array $options)
     {
         $rcm_windows_config = new RCMWindows();
         $rcm_windows_config->setItemName($item_name)->setShowName($show_name)->setPath($path)->setIcon($icon);
