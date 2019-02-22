@@ -37,5 +37,5 @@ foreach ($data as $v) {
     }
 }
 
-$right_click_menu = new \src\RCM\RightClickMenu($data);
-$right_click_menu->generate();
+$right_click_menu = new \src\RightClickMenu($data);
+var_dump($right_click_menu->generate());

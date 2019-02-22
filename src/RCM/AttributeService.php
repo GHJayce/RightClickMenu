@@ -67,6 +67,6 @@ class AttributeService implements AttributeSet
 
     public function getExtend()
     {
-        return $this->extend;
+        return isset($this->extend) ? $this->extend : false;
     }
 }
