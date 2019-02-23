@@ -1,7 +1,8 @@
 <?php
 
-namespace src;
+namespace service;
 
+use src\Generator;
 use src\RCM\AttributeService;
 use src\RCM\AttributeSet;
 use src\RCM\CreatorService;
