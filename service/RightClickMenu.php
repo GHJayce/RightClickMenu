@@ -45,32 +45,36 @@ class RightClickMenu implements Generator
         $creator_service = new CreatorService($this->creator_registry, $this->creator_registry_item);
         $remover_service = new RemoverService($this->remover_registry, $this->remover_registry_item);
 
-        foreach ($this->params as $v) {
+        foreach ($this->params as $k => $v) {
             $attribute_set
-                ->setRegistryName($v['registry_name'])
-                ->setMenuName($v['menu_name'])
-                ->setPath($v['path']);
+                ->setRegistryName(repairZero($k+1))
+                ->setMenuName($v['menu_name']);
 
-            if (!empty($v['icon'])) {
+            if (!empty($v['children'])) {
                 $attribute_set->setIcon($v['icon']);
             } else {
-                $attribute_set->setIcon($v['path']);
-            }
-
-            foreach ($v['department'] as $dk => $dv) {
-
-                if (isset($v['extend'][$dk]) && $v['extend'][$dk] == 1) {
-                    $attribute_set->setExtend('');
+                $attribute_set->setPath(strpos($v['path'], '.exe') !== false ? $v['path'] . ' %1' : $v['path']);
+                if (!empty($v['icon'])) {
+                    $attribute_set->setIcon($v['icon']);
                 } else {
-                    $attribute_set->setExtend(false);
+                    $attribute_set->setIcon($v['path']);
                 }
 
-                $department = $this->getDepartmentByFlag($dv);
+                foreach ($v['department'] as $dk => $dv) {
 
-                $rcm_department = $this->getRCMDepartment($attribute_set, $department);
+                    if (isset($v['extend'][$dk]) && $v['extend'][$dk] == 1) {
+                        $attribute_set->setExtend('');
+                    } else {
+                        $attribute_set->setExtend(false);
+                    }
 
-                $creator_service->setRCMDepartment($rcm_department)->handle();
-                $remover_service->setRCMDepartment($rcm_department)->handle();
+                    $department = $this->getDepartmentByFlag($dv);
+
+                    $rcm_department = $this->getRCMDepartment($attribute_set, $department);
+
+                    $creator_service->setRCMDepartment($rcm_department)->handle();
+                    $remover_service->setRCMDepartment($rcm_department)->handle();
+                }
             }
         }
 

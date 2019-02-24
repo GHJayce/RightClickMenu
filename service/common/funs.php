@@ -24,3 +24,9 @@ function dump()
     }
     echo '</pre>';
 }
+
+
+function repairZero($number)
+{
+    return $number > 10 ? $number : '0'.$number;
+}

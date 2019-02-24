@@ -10,6 +10,20 @@ $data = [
         'icon' => '%SYSTEMROOT%\explorer.exe',
         'department' => [1, 2],
         'extend' => [1, 0],
+        'children' => [
+            [
+                'registry_name' => 'IAmChildren',
+                'menu_name' => '子菜单一',
+                'path' => 'mshta vbscript:clipboarddata.setdata("text","%1")(close)',
+                'icon' => '%SYSTEMROOT%\explorer.exe',
+            ],
+            [
+                'registry_name' => 'IAmChildren2',
+                'menu_name' => '子菜单二',
+                'path' => 'mshta vbscript:clipboarddata.setdata("text","%1")(close)',
+                'icon' => '%SYSTEMROOT%\explorer.exe',
+            ],
+        ],
     ],
     [
         'registry_name' => 'Cmder',
