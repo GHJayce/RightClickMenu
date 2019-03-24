@@ -6,15 +6,45 @@ class CreatorService extends Service
 {
     public function handle()
     {
+        $list = [
+            self::IMPLEMENT_FLAG_SINGLE => 'singleHandle',
+            self::IMPLEMENT_FLAG_CASCADE => 'cascadeHandle',
+        ];
+
+        $this->implement_flag = empty($this->implement_flag) ? self::IMPLEMENT_FLAG_SINGLE : $this->implement_flag;
+
+        $this->commonHandle();
+        $this->{$list[$this->implement_flag]}();
+    }
+
+    /**
+     * 抽出共同的处理
+     */
+    protected function commonHandle()
+    {
         $this->cloneRegistryItem();
         $this->registerStaffForDepartment();
         $this->createStaffArchive();
         $this->addRegistryItem();
+    }
 
+    /**
+     * 单菜单实现处理
+     */
+    protected function singleHandle()
+    {
         $this->cloneRegistryItem();
         $this->registerDeviceByStaff();
         $this->allocationDeviceForStaff();
         $this->addRegistryItem();
+    }
+
+    /**
+     * 级联菜单实现处理
+     */
+    protected function cascadeHandle()
+    {
+        $this->registry_item->setAttribute('ExtendedSubCommandsKey', $this->attribute_set->getExtendedSubCommandsKey());
     }
 
     /**

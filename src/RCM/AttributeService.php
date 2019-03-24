@@ -9,6 +9,7 @@ class AttributeService implements AttributeSet
     protected $path;
     protected $icon;
     protected $extend;
+    protected $extendedSubCommandsKey;
 
     public function setRegistryName($registry_name)
     {
@@ -45,6 +46,13 @@ class AttributeService implements AttributeSet
         return $this;
     }
 
+    public function setExtendedSubCommandsKey($position)
+    {
+        $this->extendedSubCommandsKey = $position;
+
+        return $this;
+    }
+
     public function getRegistryName()
     {
         return $this->registry_name;
@@ -68,5 +76,10 @@ class AttributeService implements AttributeSet
     public function getExtend()
     {
         return isset($this->extend) ? $this->extend : false;
+    }
+
+    public function getExtendedSubCommandsKey()
+    {
+        return $this->extendedSubCommandsKey;
     }
 }

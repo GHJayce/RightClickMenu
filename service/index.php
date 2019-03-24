@@ -4,9 +4,8 @@ require './autoload.php';
 
 $data = [
     [
-        'registry_name' => 'CopyPath',
-        'menu_name' => '复制目标路径',
-        'path' => 'mshta vbscript:clipboarddata.setdata("text","%1")(close)',
+        'registry_name' => 'cascadeDemo',
+        'menu_name' => '我的级联菜单演示',
         'icon' => '%SYSTEMROOT%\explorer.exe',
         'department' => [1, 2],
         'extend' => [1, 0],
@@ -20,18 +19,55 @@ $data = [
             [
                 'registry_name' => 'IAmChildren2',
                 'menu_name' => '子菜单二',
-                'path' => 'mshta vbscript:clipboarddata.setdata("text","%1")(close)',
                 'icon' => '%SYSTEMROOT%\explorer.exe',
+                'children' => [
+                    [
+                        'registry_name' => 'IAmChildren3',
+                        'menu_name' => '子菜单三',
+                        'path' => 'mshta vbscript:clipboarddata.setdata("text","%1")(close)',
+                        'icon' => '%SYSTEMROOT%\explorer.exe',
+                    ],
+                ],
             ],
         ],
     ],
+//    [
+//        'registry_name' => 'CopyPath',
+//        'menu_name' => '复制目标路径',
+//        'path' => 'mshta vbscript:clipboarddata.setdata("text","%1")(close)',
+//        'icon' => '%SYSTEMROOT%\explorer.exe',
+//        'department' => [1, 2],
+//        'extend' => [1, 0],
+//        'children' => [
+//            [
+//                'registry_name' => 'IAmChildren',
+//                'menu_name' => '子菜单一',
+//                'path' => 'mshta vbscript:clipboarddata.setdata("text","%1")(close)',
+//                'icon' => '%SYSTEMROOT%\explorer.exe',
+//            ],
+//            [
+//                'registry_name' => 'IAmChildren2',
+//                'menu_name' => '子菜单二',
+//                'path' => 'mshta vbscript:clipboarddata.setdata("text","%1")(close)',
+//                'icon' => '%SYSTEMROOT%\explorer.exe',
+//            ],
+//        ],
+//    ],
     [
-        'registry_name' => 'Cmder',
-        'menu_name' => 'Cmder here',
-        'path' => 'F:\installed\cmder\Cmder.exe',
-        'icon' => '',
+        'registry_name' => 'IAmChildren-2',
+        'menu_name' => '我的单菜单演示2',
+        'path' => 'mshta vbscript:clipboarddata.setdata("text","%1")(close)',
+        'icon' => '%SYSTEMROOT%\explorer.exe',
         'department' => [3],
         'extend' => [1],
+    ],
+    [
+        'registry_name' => 'IAmChildren-3',
+        'menu_name' => '我的单菜单演示3',
+        'path' => 'mshta vbscript:clipboarddata.setdata("text","%1")(close)',
+        'icon' => '%SYSTEMROOT%\explorer.exe',
+        'department' => [2, 3],
+        'extend' => [0, 1],
     ],
 ];
 

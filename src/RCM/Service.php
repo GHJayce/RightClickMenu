@@ -6,8 +6,12 @@ use src\Generator;
 use src\Registry\Registry;
 use src\Registry\RegistryItemService;
 
-abstract class Service implements Generator
+abstract class Service implements Generator, Processor
 {
+    const IMPLEMENT_FLAG_SINGLE = 'single';
+    const IMPLEMENT_FLAG_CASCADE = 'cascade';
+
+    protected $implement_flag;
     protected $registry_content = '';
     protected $registry;
     protected $registry_item;
@@ -57,5 +61,30 @@ abstract class Service implements Generator
     protected function registerStaffForDepartment()
     {
         $this->registry_item->setLocation($this->rcm_department->getDepartment()->setStaffItem('')->generate());
+    }
+
+    /**
+     * 设置单菜单实现标识
+     */
+    public function setSingleImplementer()
+    {
+        $this->implement_flag = self::IMPLEMENT_FLAG_SINGLE;
+
+        return $this;
+    }
+
+    /**
+     * 设置级联菜单实现标识
+     */
+    public function setCasCadeImplementer()
+    {
+        $this->implement_flag = self::IMPLEMENT_FLAG_CASCADE;
+
+        return $this;
+    }
+
+    public function getImplementer()
+    {
+        return $this->implement_flag;
     }
 }
