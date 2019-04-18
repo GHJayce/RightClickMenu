@@ -62,8 +62,9 @@ class RightClickMenu implements Generator
 
             if (!empty($v['children'])) {
                 $creator_service->setCasCadeImplementer();
-                $attribute_set->setIcon($v['icon']);
-                if (empty($v['department'])) {
+                $attribute_set->setIcon(isset($v['icon']) ? $v['icon'] : '');
+                $children_registry_name = '';
+                if (empty($v['departments'])) {
                     $department = $this->getDepartmentByFlag(0);
 
                     $children_registry_name = $department->getChildDepartment().'\\'.md5($v['registry_name'].$v['menu_name'].'\shell');
@@ -71,8 +72,8 @@ class RightClickMenu implements Generator
                     $attribute_set->setExtendedSubCommandsKey($children_registry_name);
                     $this->handleParamsByDepartments($department, $attribute_set, $creator_service, $remover_service);
                 } else {
-                    foreach ($v['department'] as $dk => $dv) {
-                        if (isset($v['extend'][$dk]) && $v['extend'][$dk] == 1) {
+                    foreach ($v['departments'] as $dk => $dv) {
+                        if (isset($v['extends'][$dk]) && $v['extends'][$dk] == 1) {
                             $attribute_set->setExtend('');
                         } else {
                             $attribute_set->setExtend(false);
@@ -89,15 +90,12 @@ class RightClickMenu implements Generator
                 $this->handleParams($v['children'], $attribute_set, $creator_service, $remover_service, $children_registry_name);
             } else {
                 $creator_service->setSingleImplementer();
-                $attribute_set->setPath(strpos($v['path'], '.exe') !== false ? $v['path'] . ' %1' : $v['path']);
-                if (!empty($v['icon'])) {
-                    $attribute_set->setIcon($v['icon']);
-                } else {
-                    $attribute_set->setIcon($v['path']);
-                }
-                if (!empty($v['department'])) {
-                    foreach ($v['department'] as $dk => $dv) {
-                        if (isset($v['extend'][$dk]) && $v['extend'][$dk] == 1) {
+                $has_exe_suffix = strpos($v['path'], '.exe') !== false;
+                $attribute_set->setPath($has_exe_suffix ? $v['path'] . ' %1' : $v['path']);
+                $attribute_set->setIcon(!empty($v['icon']) ? $v['icon'] : ($has_exe_suffix ? $v['path'] : ''));
+                if (!empty($v['departments'])) {
+                    foreach ($v['departments'] as $dk => $dv) {
+                        if (isset($v['extends'][$dk]) && $v['extends'][$dk] == 1) {
                             $attribute_set->setExtend('');
                         } else {
                             $attribute_set->setExtend(false);
@@ -143,9 +141,12 @@ class RightClickMenu implements Generator
     {
         $department_list = [
             0 => 'RightClickMenuShell',
-            1 => 'DirectoryShell',
-            2 => 'AllShell',
-            3 => 'DirectoryBackgroundShell',
+            1 => 'AllShell',
+            2 => 'DirectoryShell',
+            3 => 'DriveShell',
+            4 => 'FolderShell',
+            5 => 'DirectoryBackgroundShell',
+            6 => 'DesktopBackgroundShell',
         ];
         $object = '\src\Registry\Department\\'.$department_list[$flag];
 

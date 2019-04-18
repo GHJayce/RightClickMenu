@@ -30,3 +30,23 @@ function repairZero($number)
 {
     return $number > 10 ? $number : '0'.$number;
 }
+
+/**
+ * 转为树形结构
+ *
+ * 前提条件 $k必须是id
+ *
+ * @param array $arr
+ * @param array $res
+ * @param string $pid_key
+ * @param string $children_key
+ * @return array
+ */
+function toTree(array $arr, $res = [], $pid_key = 'pid', $children_key = 'children')
+{
+    foreach ($arr as $k => $v) {
+        isset($arr[$v[$pid_key]]) ? $arr[$v[$pid_key]][$children_key][] = &$arr[$k] : $res[] = &$arr[$k];
+    }
+
+    return $res;
+}
