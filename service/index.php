@@ -96,4 +96,33 @@ foreach ($data as $v) {
 }
 
 $right_click_menu = new \service\RightClickMenu($data);
-dump($right_click_menu->generate());
+
+$registry_list = $right_click_menu->generate();
+
+$save_dir = __DIR__.DIRECTORY_SEPARATOR;
+
+$save_path = 'download'.DIRECTORY_SEPARATOR;
+
+if (!file_exists($save_dir.$save_path)) {
+    mkdir($save_dir.$save_path);
+}
+
+$zip_path = $save_path.'RightClickMenu_'.date('Y-m-d_H.i.s').'.zip';
+
+$zip_file_path = $save_dir.$zip_path;
+
+$zip = new ZipArchive();
+
+$zip_file = $zip->open($zip_file_path, ZipArchive::OVERWRITE | ZipArchive::CREATE);
+
+if ($zip_file) {
+    $zip->addFromString('create_right_click_menu.reg', iconv('utf-8', 'gb2312', $registry_list['create']));
+    $zip->addFromString('remove_right_click_menu.reg', iconv('utf-8', 'gb2312', $registry_list['remove']));
+}
+
+$zip->close();
+
+echo json_encode([
+    'status' => 'success',
+    'data' => array_merge($registry_list, ['path' => 'service/'.$zip_path]),
+], 256);
