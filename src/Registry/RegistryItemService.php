@@ -47,7 +47,7 @@ class RegistryItemService extends RegistryItem
 
         foreach ($attributes as $k => $v) {
             $key = $k === '@' ? '@' : "\"$k\"";
-            $item .= "\n{$key} = \"".addslashes($v)."\"";
+            $item .= "\n{$key} = \"".addcslashes($v, '"\\')."\"";
         }
 
         return "{$item}\n";

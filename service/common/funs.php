@@ -26,7 +26,7 @@ function dump()
 }
 
 
-function repairZero($number)
+function repair_zero($number)
 {
     return $number > 10 ? $number : '0'.$number;
 }
@@ -42,11 +42,49 @@ function repairZero($number)
  * @param string $children_key
  * @return array
  */
-function toTree(array $arr, $res = [], $pid_key = 'pid', $children_key = 'children')
+function to_tree(array $arr, $res = [], $pid_key = 'pid', $children_key = 'children')
 {
     foreach ($arr as $k => $v) {
         isset($arr[$v[$pid_key]]) ? $arr[$v[$pid_key]][$children_key][] = &$arr[$k] : $res[] = &$arr[$k];
     }
 
     return $res;
+}
+
+/**
+ * 异步请求响应
+ *
+ * @param string $status
+ * @param array $data
+ * @param string $msg
+ * @return string
+ */
+function response($status, $data = [], $msg = '')
+{
+    echo json_encode([
+        'status' => $status,
+        'data' => $data,
+        'message' => $msg,
+    ], 256);die;
+}
+
+/**
+ * 提示错误的响应
+ *
+ * @param string $msg
+ */
+function response_error($msg)
+{
+    response('error', [], $msg);
+}
+
+/**
+ * 提示成功的响应
+ *
+ * @param array $data
+ * @param string $msg
+ */
+function response_success(array $data = [], $msg = '')
+{
+    response('success', $data, $msg);
 }
