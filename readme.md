@@ -29,7 +29,7 @@ php -S localhost:8080
 
 ## 线上浏览
 
-[https://ghbjayce.github.io/RightClickMenu/](https://ghjayce.github.io/RightClickMenu/)
+[https://ghjayce.github.io/RightClickMenu/](https://ghjayce.github.io/RightClickMenu/)
 
 ## 前端项目
 
