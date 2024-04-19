@@ -25,12 +25,12 @@ php -S localhost:8080
 
 ## 演示
 
-![应用使用演示](https://raw.githubusercontent.com/GHBJayce/Assets/master/RightClickMenu/demo_v2.0.0.gif)
+![应用使用演示](https://raw.githubusercontent.com/GHJayce/Assets/master/RightClickMenu/demo_v2.0.0.gif)
 
 ## 线上浏览
 
-[https://ghbjayce.github.io/RightClickMenu/](https://ghbjayce.github.io/RightClickMenu/)
+[https://ghbjayce.github.io/RightClickMenu/](https://ghjayce.github.io/RightClickMenu/)
 
 ## 前端项目
 
-[right-click-menu-front](https://github.com/GHBJayce/right-click-menu-front)
+[right-click-menu-front](https://github.com/GHJayce/right-click-menu-front)
